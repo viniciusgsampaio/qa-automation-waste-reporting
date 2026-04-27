@@ -19,6 +19,12 @@
 | **E** | exibir um número de protocolo |
 | **E** | apresentar o modal de confirmação |
 
+### Evidências
+
+![CT-01 evidência 1](evidencias/image1.png)
+![CT-01 evidência 2](evidencias/image2.png)
+![CT-01 evidência 3](evidencias/image3.png)
+
 ---
 
 ## ❌ CT-02 — Tentativa de envio sem tipo de ocorrência
@@ -31,6 +37,11 @@
 | **Quando** | ele preenche todos os campos obrigatórios exceto o tipo de ocorrência |
 | **E** | aciona "Enviar denúncia" |
 | **Então** | o sistema deve exibir uma mensagem solicitando a seleção do tipo |
+
+### Evidências
+
+![CT-02 evidência 1](evidencias/image4.png)
+![CT-02 evidência 2](evidencias/image5.png)
 
 ---
 
@@ -45,6 +56,11 @@
 | **E** | aciona "Enviar denúncia" |
 | **Então** | o sistema deve exibir mensagem solicitando o bairro |
 
+### Evidências
+
+![CT-03 evidência 1](evidencias/image6.png)
+![CT-03 evidência 2](evidencias/image7.png)
+
 ---
 
 ## ❌ CT-04 — Tentativa de envio sem descrição
@@ -57,6 +73,11 @@
 | **Quando** | ele não preenche o campo de descrição |
 | **E** | aciona "Enviar denúncia" |
 | **Então** | o sistema deve exibir mensagem solicitando a descrição da ocorrência |
+
+### Evidências
+
+![CT-04 evidência 1](evidencias/image8.png)
+![CT-04 evidência 2](evidencias/image9.png)
 
 ---
 
@@ -71,6 +92,11 @@
 | **E** | aciona "Enviar denúncia" |
 | **Então** | o sistema deve exibir mensagem solicitando o nível de urgência |
 
+### Evidências
+
+![CT-05 evidência 1](evidencias/image10.png)
+![CT-05 evidência 2](evidencias/image11.png)
+
 ---
 
 ## 📷 CT-06 — Upload de imagens
@@ -82,6 +108,10 @@
 | **Dado** | que o usuário acessa o sistema |
 | **Quando** | ele seleciona uma ou mais imagens |
 | **Então** | o sistema deve exibir o preview das imagens carregadas |
+
+### Evidências
+
+![CT-06 evidência 1](evidencias/image12.png)
 
 ---
 
@@ -96,6 +126,11 @@
 | **Então** | o formulário deve ser limpo |
 | **E** | todos os campos devem retornar ao estado inicial |
 
+### Evidências
+
+![CT-07 evidência 1](evidencias/image13.png)
+![CT-07 evidência 2](evidencias/image14.png)
+
 ---
 
 ## 📍 CT-08 — Obter localização do usuário
@@ -109,6 +144,11 @@
 | **Então** | o sistema deve solicitar permissão de localização |
 | **E** | exibir as coordenadas capturadas |
 
+### Evidências
+
+![CT-08 evidência 1](evidencias/image15.png)
+![CT-08 evidência 2](evidencias/image16.png)
+
 ---
 
 ## 🚫 CT-09 — Negar permissão de localização
@@ -120,3 +160,8 @@
 | **Dado** | que o usuário acessa o sistema |
 | **Quando** | ele nega a permissão de localização |
 | **Então** | o sistema deve exibir mensagem informando falha ao obter localização |
+
+### Evidências
+
+![CT-09 evidência 1](evidencias/image17.png)
+![CT-09 evidência 2](evidencias/image18.png)
