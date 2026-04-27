@@ -1,0 +1,80 @@
+// tests/denuncia.spec.js
+const { test, expect } = require('@playwright/test');
+
+test.describe('Denúncia de Lixo - Formulário', () => {
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto('file://' + __dirname + '/../index.html'); 
+    // se estiver hospedado, troque pela URL
+  });
+
+  test('CT-01 - Enviar denúncia com sucesso', async ({ page }) => {
+    await page.click('text=Entulho / Construção');
+
+    await page.selectOption('select[name="bairro"]', { label: 'Centro' });
+    await page.fill('input[name="rua"]', 'Rua Teste 123');
+
+    await page.click('text=Alta');
+    await page.fill('textarea[name="descricao"]', 'Teste de denúncia com sucesso');
+
+    await page.click('button[type="submit"]');
+
+    await expect(page.locator('#modalSucesso')).toBeVisible();
+    await expect(page.locator('#numProtocolo')).not.toHaveText('—');
+  });
+
+  test('CT-02 - Validar erro sem tipo', async ({ page }) => {
+    await page.selectOption('select[name="bairro"]', { label: 'Centro' });
+    await page.fill('input[name="rua"]', 'Rua Teste');
+
+    await page.click('text=Alta');
+    await page.fill('textarea[name="descricao"]', 'Teste');
+
+    page.on('dialog', async dialog => {
+      expect(dialog.message()).toContain('tipo de ocorrência');
+      await dialog.accept();
+    });
+
+    await page.click('button[type="submit"]');
+  });
+
+  test('CT-03 - Validar erro sem bairro', async ({ page }) => {
+    await page.click('text=Entulho / Construção');
+    await page.fill('input[name="rua"]', 'Rua Teste');
+
+    await page.click('text=Alta');
+    await page.fill('textarea[name="descricao"]', 'Teste');
+
+    page.on('dialog', async dialog => {
+      expect(dialog.message()).toContain('bairro');
+      await dialog.accept();
+    });
+
+    await page.click('button[type="submit"]');
+  });
+
+  test('CT-04 - Upload de imagem', async ({ page }) => {
+    await page.setInputFiles('#fotoInput', 'tests/fixtures/imagem.jpg');
+
+    const imagens = page.locator('#previewFotos img');
+    await expect(imagens).toHaveCount(1);
+  });
+
+  test('CT-05 - Limpar formulário após envio', async ({ page }) => {
+    await page.click('text=Entulho / Construção');
+
+    await page.selectOption('select[name="bairro"]', { label: 'Centro' });
+    await page.fill('input[name="rua"]', 'Rua Teste');
+
+    await page.click('text=Alta');
+    await page.fill('textarea[name="descricao"]', 'Teste');
+
+    await page.click('button[type="submit"]');
+
+    await page.click('text=Fazer nova denúncia');
+
+    await expect(page.locator('input[name="rua"]')).toHaveValue('');
+    await expect(page.locator('textarea[name="descricao"]')).toHaveValue('');
+  });
+
+});
